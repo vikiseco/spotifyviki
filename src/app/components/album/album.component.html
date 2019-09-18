@@ -1,0 +1,65 @@
+
+<head>
+    
+</head>
+
+<div class="row animated fadeIn head" *ngIf="album" >
+  <div class="col-2">
+    <img [src]="album.images | noimage  " class=" img-thumbnail img-circle" rel="noopener noreferrer" />
+  </div>
+
+  <div class="col- 3"><br>
+    <h3><br>Album: {{ album.name }}</h3>
+    <p>
+      <a [href]="album.external_urls?.spotify" target="_blank" rel="noopener noreferrer">
+        <button class="btn btn-success"> Ir a la página del album
+        </button>
+      </a>
+    </p>  
+  </div>
+
+
+</div>
+
+<div class="row m-5">
+  <div class="col">
+    <table class="table" id="myTable">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Título</th>
+          <th (click)="sortTable()">Duración</th>
+          <th>Canción</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr  *ngFor="let track of tracks">
+          <td><img [src]="album.images | noimage" class="img-detalle"  /></td>
+          <td>{{track.name}}</td>
+          <td>{{track.duration_ms | date: "mm:ss"}}</td>               
+          <td>
+              <iframe
+                [src]="track.uri | PipeSeguro"
+                width="320"
+                height="90"
+                frameborder="0"
+                allowtransparency="true"
+                allow="encrypted-media"
+              ></iframe>
+            </td>
+            <td>
+              
+              <button class="fav" (click)="AddRemoveFav(track.id)">
+              <i *ngIf="checkFav(track.id)" class="glyphicon glyphicon-heart"></i>
+              <i *ngIf="!checkFav(track.id)" class="glyphicon glyphicon-heart-empty" ></i>
+              </button>
+             
+            </td>
+
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

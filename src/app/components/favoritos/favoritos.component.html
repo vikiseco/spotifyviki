@@ -1,0 +1,25 @@
+
+<h4>Mis canciones favoritas</h4>
+<div class="card-columns m-5 animated fadeIn">
+
+  <div  *ngFor="let track of tracksFavorites" class="card puntero"style="width: 15rem">
+      <iframe style="width: 14.9rem;"
+      [src]="track.uri | PipeSeguro"
+      width="320"
+      height="90"
+      frameborder="0"
+      allowtransparency="true"
+      allow="encrypted-media"
+    ></iframe>
+      <div class="card-body" >          
+          <h5 (click)=verAlbum(track.album) class="card-title">{{ track.name }}</h5>
+          <h6 class="card-title">Album: {{ track.album.name }}</h6>
+
+          <button class="fav" (click)="AddRemoveFav(track.id)">
+              <i *ngIf="checkFav(track.id)" class="glyphicon glyphicon-heart"></i>
+              <i *ngIf="!checkFav(track.id)" class="glyphicon glyphicon-heart-empty"></i>
+          </button>
+      </div>
+  </div>
+
+</div>
